@@ -1,0 +1,41 @@
+sequenceDiagram
+    participant FWA as Frontend Web App
+    participant A as Service A
+    participant DB A
+    participant B as Service B
+    participant DB B
+
+    FWA ->> A: /post purchase item
+    Note over FWA, A: /post purchase<br/>itemId=475<br/>itemName=Audi R8<br/>quantity=1<br/>coupon=BUDUCI_KLASICI<br/>deliveryOption=Trailer
+    activate FWA
+    activate A
+    A ->> A: Process
+    alt Unable to purchase this item
+        A -->> FWA: Error, unable to purchase
+    end
+    A ->>+ DB A: store to DB
+    DB A -->>- A: Stored
+    A -->> FWA: 200 OK
+    deactivate FWA
+    A ->> B: /post payment
+    activate B
+    B ->> B: Process payment
+    B ->>+ DB B: store payment
+    DB B -->>- B: done
+    B -->> A: Done
+    deactivate B
+    opt Call service C for some reason
+        Note over A, External Service C: Service A has to notify external service C
+        A ->+ External Service C: Do something
+        External Service C -->>- A: Some Response
+        alt 
+            A ->>+ DB A: Store something to DB
+            DB A -->>- A: Ok
+        end
+
+    end
+    deactivate A
+    
+
+
+
