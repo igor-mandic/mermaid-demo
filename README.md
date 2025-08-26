@@ -1,5 +1,16 @@
 # mermaid-demo
 
+Some Readme text
+about something..
+
+<h1> How to use ...</h1>
+asdk aslkd jaslkdjasl j
+klasjdlkasjkd kasdl kaslaskd jlakj
+askldj lsaksd jkasdk jak
+
+
+<h1> Class Diagram </h1>
+
 ```mermaid
 classDiagram
     class Animal {
